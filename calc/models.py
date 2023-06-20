@@ -26,15 +26,23 @@ class PaymentMethods(models.Model):
 
 
 class Operations(models.Model):
-    date = models.DateTimeField(auto_now_add=True, )
-    stuff_id = models.ForeignKey(Stuff, on_delete=models.SET_NULL, null=True)
-    name_of_product_id = models.ForeignKey(Products, on_delete=models.SET_NULL, null=True)
+    fk_name_of_product = models.ForeignKey(Products, on_delete=models.PROTECT, null=True)
     deb_cred = models.BooleanField()
     price = models.DecimalField(max_digits=8, decimal_places=2)
     amount = models.IntegerField(validators=[validators.MinValueValidator(0)])
+
+
+    class Meta:
+        db_table = "operations"
+
+
+class Sales(models.Model):
+    sell_id = models.IntegerField(validators=[validators.MinValueValidator(0)])
+    date = models.DateTimeField(auto_now_add=True, )
+    fk_stuff = models.ForeignKey(Stuff, on_delete=models.PROTECT, null=True)
     total = models.DecimalField(max_digits=15, decimal_places=2, validators=[validators.MinValueValidator(0)])
-    payment_id = models.ForeignKey(PaymentMethods, on_delete=models.SET_NULL, null=True)
+    fk_payment = models.ForeignKey(PaymentMethods, on_delete=models.PROTECT, null=True)
     notice = models.TextField(null=True)
 
     class Meta:
-        db_table = "Operations"
+        db_table = "sales"
