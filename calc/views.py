@@ -55,8 +55,8 @@ class StuffCreateAndListView(CreateView, ListView):
     def post(self, request, *args, **kwargs):
         self.object_list = Stuff.objects.all()
         print(request.POST)
-        if 'delete_selected' in request.POST:
-            selected_items = request.POST.getlist('selected_item')
+        if 'stuff_selected' in request.POST:
+            selected_items = request.POST.getlist('stuff_selected')
             print(request.POST, selected_items)
             Stuff.objects.filter(id__in=selected_items).delete()
             return redirect(self.request.path_info)

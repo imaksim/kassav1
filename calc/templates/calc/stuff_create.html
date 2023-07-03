@@ -9,6 +9,7 @@
 
         <thead>
         <tr>
+            <th scope="col">*</th>
             <th scope="col">#</th>
             <th scope="col">Имя пользователя</th>
             <th scope="col">Email</th>
@@ -18,6 +19,7 @@
         <tbody>
         {% for stuff in stuff_list_create %}
         <tr>
+            <td><input type="checkbox" name="stuff_selected" value="{{stuff.id}}"></td>
             <th scope="row">{{stuff.id}}</th>
             <td>{{stuff.name}}</td>
             <td>{{stuff.email}}</td>
