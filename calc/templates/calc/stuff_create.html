@@ -1,7 +1,7 @@
 {% extends "calc/main.html" %}
 
 {% block  content %}
-<h1>Products</h1>
+<h1>Пользователи </h1>
 
 <form method="post">
 {% csrf_token %}
@@ -10,15 +10,18 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Имя операции</th>
+            <th scope="col">Имя пользователя</th>
+            <th scope="col">Email</th>
+            <th scope="col">Активный</th>
         </tr>
         </thead>
         <tbody>
-        {% for product in product_list_create %}
+        {% for stuff in stuff_list_create %}
         <tr>
-            <th scope="row">{{product.id}}</th>
-            <td>{{product.name}}</td>
-            <td><input type="checkbox" name="selected_item" value="{{product.id}}"></td>
+            <th scope="row">{{stuff.id}}</th>
+            <td>{{stuff.name}}</td>
+            <td>{{stuff.email}}</td>
+            <td><input type="checkbox" name="stuff_status" value="{{stuff.status}}"></td>
         </tr>
         {% endfor %}
         </tbody>
