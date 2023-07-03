@@ -27,7 +27,21 @@
 <!--        </tr>-->
 </tbody>
 </table>
-{% block product_form %}
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+<!--            <input type="submit" value="Save">-->
+    <button  type="submit">Сохранить</button>
+</form>
 {% endblock %}
+<!--{% extends "calc/products.html" %}-->
 
-{% endblock %}
+<!--{% block  product_form %}-->
+
+<!--<form method="post">{% csrf_token %}-->
+<!--    {{ form.as_p }}-->
+<!--&lt;!&ndash;            <input type="submit" value="Save">&ndash;&gt;-->
+<!--    <button  type="submit">Сохранить</button>-->
+<!--</form>-->
+
+
+<!--{% endblock %}-->
