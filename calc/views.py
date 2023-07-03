@@ -28,7 +28,6 @@ class ProductCreateAndListView(CreateView, ListView):
     success_url = reverse_lazy('products_create_view')
 
     def post(self, request, *args, **kwargs):
-        self.object_list = Products.objects.all()
         print(request.POST)
         if 'delete_selected' in request.POST:
             selected_items = request.POST.getlist('selected_item')
@@ -53,8 +52,6 @@ class StuffCreateAndListView(CreateView, ListView):
     context_object_name = 'stuff_list_create'
     success_url = reverse_lazy('stuff_create_view')
     def post(self, request, *args, **kwargs):
-        self.object_list = Stuff.objects.all()
-        print(request.POST)
         if 'stuff_selected' in request.POST:
             selected_items = request.POST.getlist('stuff_selected')
             print(request.POST, selected_items)
@@ -64,6 +61,8 @@ class StuffCreateAndListView(CreateView, ListView):
             form = self.get_form()
             print(form)
             return self.form_valid(form)
+
+
             # return super().post(request, *args, **kwargs)
 
 
