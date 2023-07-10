@@ -11,7 +11,9 @@ class ProductForm(forms.ModelForm):
 
 class StuffForm(forms.ModelForm):
     name = forms.CharField(label="Имя")
-    status = forms.BooleanField(label='Активный')
+    status = forms.BooleanField(label='Активный', required=False )
     class Meta:
         model = Stuff
         fields = '__all__'
+
+

@@ -44,6 +44,9 @@ class ProductCreateAndListView(CreateView, ListView):
         form.save()
         return super().form_valid(form)
 
+class CreditCreateListView(ProductCreateAndListView):
+    pass
+
 
 class StuffCreateAndListView(CreateView, ListView):
     model = Stuff
@@ -52,14 +55,19 @@ class StuffCreateAndListView(CreateView, ListView):
     context_object_name = 'stuff_list_create'
     success_url = reverse_lazy('stuff_create_view')
     def post(self, request, *args, **kwargs):
-        if 'stuff_selected' in request.POST:
+        print(request.POST)
+        if 'delete_selected' in request.POST:
             selected_items = request.POST.getlist('stuff_selected')
             print(request.POST, selected_items)
             Stuff.objects.filter(id__in=selected_items).delete()
             return redirect(self.request.path_info)
+        elif 'save_item' in request.POST:
+            a = request.POST.getlist("stuff_status")
+            Stuff.objects.filter(id__in=a).update(status=True)
+            Stuff.objects.exclude(id__in=a).update(status=False)
+            return redirect(self.request.path_info)
         elif 'add_item' in request.POST:
             form = self.get_form()
-            print(form)
             return self.form_valid(form)
 
 

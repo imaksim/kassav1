@@ -23,17 +23,19 @@
             <th scope="row">{{stuff.id}}</th>
             <td>{{stuff.name}}</td>
             <td>{{stuff.email}}</td>
-            <td><input type="checkbox" name="stuff_status" value="{{stuff.status}}"></td>
+            <td><input type="checkbox" name="stuff_status" {% if stuff.status %}checked{% endif %} value="{{stuff.id}}"></td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
+    <button  type="submit" name="save_item">Сохранить</button>
     <button  type="submit" name="delete_selected">Удалить</button>
 </form>
 <br>
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
 <!--            <input type="submit" value="Save">-->
+
     <button  type="submit" name="add_item">Добавить</button>
 </form>
 
